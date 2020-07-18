@@ -13,6 +13,9 @@ import ProfileContainer from "./Components/Profile/ProfileContainer";
 //let Comp = () => <Dialogs данные/>
 //но можно использовать render={() => <Dialogs/>}, работает шустрее
 
+//Route path="/profile/:userId?" - облегчение взятия userId из URL
+// ? - опциональный(необязательный) параметр
+
 const App = () => {
   return <div className="app-wrapper">
         <HeaderContainer/>

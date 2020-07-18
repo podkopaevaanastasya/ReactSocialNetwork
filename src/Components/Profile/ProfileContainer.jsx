@@ -9,9 +9,8 @@ import {withRouter} from 'react-router-dom'
 class ProfileContainer extends React.Component {
     componentDidMount() {
         let userId = this.props.match.params.userId
-        if (!userId) {
-            userId = 2
-        }
+        if (!userId) userId = 2
+
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
             .then(response => {
                 this.props.setUserProfile(response.data)
@@ -27,7 +26,12 @@ let mapStateToProps = (state) => ({
     profile: state.profilePage.profile
 })
 
-let WithUrlData = withRouter(ProfileContainer)
+//чтобы сделать запрос на сервер, нужны данные из URL. поэтому обернем ProfileContainer, вызовем функцию withRouter
+let WithUrlData = withRouter(ProfileContainer) //вернет комоненту ProfileContainer с данными из URL
+//нужно обратиться к props.match - совпадение URL с роутами, т.е. с /profile
+//props.match.params - тот самый нужный нам userIdю
+//props.location - путь
 
-export default connect(mapStateToProps, {setUserProfile})
-(WithUrlData)
+
+//обернем объект WithUrlData функцией connect, закинем туда данные из URL
+export default connect(mapStateToProps, {setUserProfile})(WithUrlData)

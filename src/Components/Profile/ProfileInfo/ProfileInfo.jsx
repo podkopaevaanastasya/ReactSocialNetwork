@@ -4,22 +4,20 @@ import Preloader from "../../Common/Preloader/Preloader";
 import userPhoto from "../../../Assets/Images/user.png";
 
 const ProfileInfo = (props) =>{
-    if(!props.profile){
-        return <Preloader/>
-    }
+    if(!props.profile) return <Preloader/>
 
-    return(
-        <div>
+    return <div>
             <div className={s.descriptionBlock}>
                 <img src={props.profile.photos.small != null ? props.profile.photos.small : userPhoto}/>
 
-                <div>
+                <div className={s.descriptionBlock}>
+                    {props.profile.fullName}
                     {props.profile.aboutMe}
+                    {props.profile.userId}
                 </div>
+                <a>{props.profile.contacts.vk}</a>
             </div>
-
         </div>
-    )
 }
 
 export default ProfileInfo

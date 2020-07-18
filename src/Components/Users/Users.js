@@ -14,10 +14,8 @@ let Users = (props) => {
     return <div>
         <div>
             {pages.map(p => {
-                return <span className={
-                    props.activePage === p && styles.selectedPage}
-                             onClick={(e) => {
-                                 props.onPageChanged(p)}}>{p} </span>
+                return <span className={props.activePage === p && styles.selectedPage}
+                             onClick={(e) => { props.onPageChanged(p)} }>{p} </span>
             })}
         </div>
 
@@ -40,7 +38,7 @@ let Users = (props) => {
                                     }
                                 })
                                     .then(response => {
-                                        if (response.data.resultCode == 0) {
+                                        if (response.data.resultCode === 0) {
                                             props.unfollow(u.id)
                                         }
                                     })
@@ -55,7 +53,7 @@ let Users = (props) => {
                                     }
                                 })
                                     .then(response => {
-                                        if (response.data.resultCode == 0) {
+                                        if (response.data.resultCode === 0) {
                                             props.follow(u.id)
                                         }
 
