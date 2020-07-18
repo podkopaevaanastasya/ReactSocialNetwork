@@ -1,0 +1,12 @@
+.content {
+    grid-area: c;
+}
+
+.postitem{
+    color: mediumblue;
+}
+
+.postitem img{
+    width: 100px;
+}
+

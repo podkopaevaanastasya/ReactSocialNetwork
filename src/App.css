@@ -1,0 +1,17 @@
+.app-wrapper{
+  display: grid;
+  justify-content: center;
+  margin-left: 20px;
+  margin-right: 20px;
+  grid-template-rows: 48px 1fr; /*число строк и размер*/
+  grid-template-columns: 2fr 10fr; /*число столбцов и размер*/
+  grid-gap: 10px; /*расстояние между элементами*/
+
+  grid-template-areas: /*шаблон выстраивания областей*/
+  "h h"
+  "n c";
+}
+
+.app-wrapper-content{
+  grid-area: c;
+}

@@ -1,0 +1,36 @@
+.nav {
+    grid-area: n;
+    background-color: steelblue;
+    padding: 20px;
+}
+
+.item a{
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-family: "Arial Unicode MS";
+}
+
+.item a.active{
+    color: gold;
+}
+
+.friends a{
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    font-family: "Arial Unicode MS";
+}
+
+.friends a.active{
+    color: gold;
+}
+.friends img{
+    width: 43px;
+    margin-right: 10px;
+}
+
+.friends label{
+    margin-right: 25px;
+    color: white;
+}
