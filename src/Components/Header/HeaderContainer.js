@@ -1,18 +1,12 @@
 import React from "react";
 import {connect} from "react-redux";
 import Header from "./Header";
-import {setAuthUserDataAC} from "../../Redux/authReducer";
-import {authAPI} from "../../API/API";
+import {getAuthThunkCreator} from "../../Redux/authReducer";
 
 class HeaderContainer extends React.Component{
 
     componentDidMount() {
-        authAPI.authMe().then(data => {
-                if(data.resultCode === 0){
-                    let {id, email, login} = data.data
-                    this.props.setAuthUserDataAC(id, email, login)
-                }
-            })
+        this.props.getAuthThunkCreator()  //сюда попадает коллбэк
     }
 
     render(){
@@ -27,4 +21,4 @@ let mapStateToProps = (state) =>{ //формирует данныe из State
     }
 }
 
-export default connect(mapStateToProps, {setAuthUserDataAC})(HeaderContainer)
+export default connect(mapStateToProps, {getAuthThunkCreator})(HeaderContainer)

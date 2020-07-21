@@ -2,19 +2,12 @@ import React from 'react'
 import './Profile.css'
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {setUserProfile} from "../../Redux/profileReducer";
+import {getProfileThunkCreator} from "../../Redux/profileReducer";
 import {withRouter} from 'react-router-dom'
-import {profileAPI} from "../../API/API";
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
-        let userId = this.props.match.params.userId
-        if (!userId) userId = 2
-
-        profileAPI.getProfile(userId)
-            .then(data => {
-                this.props.setUserProfile(data)
-            })
+        this.props.getProfileThunkCreator(this.props.match.params.userId)
     }
 
     render() {
@@ -34,4 +27,4 @@ let WithUrlData = withRouter(ProfileContainer) //вернет комоненту
 
 
 //обернем объект WithUrlData функцией connect, закинем туда данные из URL
-export default connect(mapStateToProps, {setUserProfile})(WithUrlData)
+export default connect(mapStateToProps, {getProfileThunkCreator})(WithUrlData)

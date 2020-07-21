@@ -1,6 +1,6 @@
 // контейнерная компонента, обертка
 import React from 'react'
-import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../Redux/profileReducer";
+import {addPost, updateNewPostText} from "../../../Redux/profileReducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 
@@ -33,10 +33,10 @@ let mapStateToProps = (state) =>{
 let mapDispatchToProps = (dispatch) =>{
     return{
         addPost: () => {
-            dispatch(addPostActionCreator()) //диспатч экшена
+            dispatch(addPost()) //диспатч экшена
         },
         updateNewPostText:(text) => {
-            dispatch(updateNewPostTextActionCreator(text))
+            dispatch(updateNewPostText(text))
         }
     }
 }

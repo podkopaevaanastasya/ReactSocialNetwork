@@ -1,13 +1,10 @@
-// страница диалогов для социальной сети, которую я реализую
-// я по смыслу раздробила проект на много компонент
-
 import React from "react";
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem"; // компонент DialogItem формирует ссылки на диалоги с другими пользователями и возвращает их
 import Message from "./Message/Message"; // компонент Message возвращает уже отправленные сообщения
 
 const Dialogs = (props) => { //передаю ветку dialogsPage, про Store эта компонента не знает
-
+    debugger
     let dialogElements = props.dialogs.map(d => <DialogItem name={d.name} key={d.id} id={d.id}/>) //формирование нового массива ссылок NavLink на имеющиеся диалоги
     let messagesElements = props.messages.map( m => <Message message={m.message} key={m.id}/>) //формирование нового массива из уже отправленных сообщений
     let newMessageText = props.newMessageText //объект для хранения в нем текста нового сообщения, ключевой объект в реализации FLUX в контексте отправляемых сообщений
@@ -23,8 +20,9 @@ const Dialogs = (props) => { //передаю ветку dialogsPage, про Sto
         //по сути при напечатывании сообщения пользователь видит каждый символ сообщения не сразу, а только после перерисовки UI, но это происходит моментально
         let text = e.target.value
         props.updateNewMessageText(text)
-
     }
+
+    alert(props.isAuth)
 
     return (
         <div className={s.dialogs}>

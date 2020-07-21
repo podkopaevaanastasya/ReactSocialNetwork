@@ -27,11 +27,11 @@ import {connect} from "react-redux"; //Action Creator из Redux для функ
 
 let mapStateToProps = (state) =>{ //формирует данныe из State
     //запускается после любого изменения в State, сравнивается содержимое двух обьектов-старого и нового State
-
     return {
         dialogs: state.dialogsPage.dialogs,
         messages: state.dialogsPage.messages,
-        newMessageText: state.dialogsPage.newMessageText
+        newMessageText: state.dialogsPage.newMessageText,
+        isAuth: state.auth.isAuth
     }
 }
 

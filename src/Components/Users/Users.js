@@ -30,22 +30,13 @@ let Users = (props) => {
 
                     <div>
                         {u.followed
-                            ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                                props.toggleIsFollowingProgress(true, u.id)
-                                usersAPI.unfollow(u.id).then(data => {
-                                    //подтверждение с сервера, успешный запрос
-                                        if (data.resultCode === 0) props.unfollow(u.id)
-                                    })
-                                props.toggleIsFollowingProgress(false, u.id)
-                            }}>Unfollow</button>
+                            ? <button disabled={props.followingInProgress.some(id => id === u.id)}
+                                      onClick={() => {props.unfollowThunkCreator(u.id)}}>
+                                Unfollow</button>
 
-                            : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                                props.toggleIsFollowingProgress(true, u.id)
-                                usersAPI.follow(u.id).then(data => {
-                                        if (data.resultCode === 0) props.follow(u.id)
-                                    })
-                                props.toggleIsFollowingProgress(false, u.id)
-                            }}>Follow</button>}
+                            : <button disabled={props.followingInProgress.some(id => id === u.id)}
+                                      onClick={() => {props.followThunkCreator(u.id)}}>
+                                Follow</button>}
                     </div>
                 </span>
                 <span>

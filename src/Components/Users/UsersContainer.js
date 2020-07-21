@@ -1,31 +1,26 @@
 import React from "react";
 import {connect} from "react-redux";
 import {
-    follow, setActivePage, setUsers, setUsersTotalCount,
-    toggleIsFetching, toggleIsFollowingProgress, unfollow
+    followSuccess,
+    followThunkCreator,
+    getUsersThunkCreator,
+    setActivePage,
+    toggleIsFollowingProgress,
+    unfollowSuccess,
+    unfollowThunkCreator
 } from "../../Redux/usersReducer";
 import Users from "./Users";
 import Preloader from "../Common/Preloader/Preloader";
-import {usersAPI} from "../../API/API";
 
 class UsersComponent extends React.Component {
 
     componentDidMount() {
-        this.props.toggleIsFetching(true)
-        usersAPI.getUsers(this.props.activePage, this.props.pageSize).then(data => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(data.items);
-                this.props.setUsersTotalCount(data.totalCount)
-            })
+        this.props.getUsersThunkCreator(this.props.activePage, this.props.pageSize) //сюда попадает коллбэк
     }
 
     onPageChanged = (activePage) => {
         this.props.setActivePage(activePage)
-        this.props.toggleIsFetching(true)
-        usersAPI.getUsers(activePage, this.props.pageSize).then(data => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(data.items)
-            })
+        this.props.getUsersThunkCreator(this.props.activePage, this.props.pageSize) //сюда попадает коллбэк
     }
 
     render() {
@@ -34,9 +29,7 @@ class UsersComponent extends React.Component {
             <Users totalUsersCount={this.props.totalCount}
                    pageSize={this.props.pageSize} activePage={this.props.activePage}
                    onPageChanged={this.onPageChanged} users={this.props.users}
-                   unfollow={this.props.unfollow} follow={this.props.follow}
-                   isFetching={this.props.isFetching} followingInProgress={this.props.followingInProgress}
-                   followingInProgress={this.props.followingInProgress}/>
+                   unfollow={this.props.unfollowSuccess} follow={this.props.followSuccess}/>
                    </>
     }
 }
@@ -61,5 +54,7 @@ let mapDispatchToProps = (dispatch) => { //формирует коллбэки
 }
 
 export default connect(mapStateToProps,{
-    follow, unfollow, setUsers, setActivePage,setUsersTotalCount, toggleIsFetching, toggleIsFollowingProgress})
+    followSuccess, unfollowSuccess, setActivePage,
+    toggleIsFollowingProgress, getUsersThunkCreator, unfollowThunkCreator,
+    followThunkCreator})
 (UsersComponent) //снабжаем данными из Store
